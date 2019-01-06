@@ -29,6 +29,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.provider.Settings.Secure;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
@@ -56,6 +57,7 @@ public class QuickSettings extends BaseSettingsFragment
     private static final String STATUS_BAR_CUSTOM_HEADER = "status_bar_custom_header";
     private static final String CUSTOM_HEADER_ENABLED = "status_bar_custom_header";
     private static final String FILE_HEADER_SELECT = "file_header_select";
+    private SystemSettingSeekBarPreference mSysuiQqsCount;
 
     private static final int REQUEST_PICK_IMAGE = 0;
 
@@ -78,6 +80,11 @@ public class QuickSettings extends BaseSettingsFragment
         super.onCreate(savedInstanceState);
 
         ContentResolver resolver = getActivity().getContentResolver();
+
+        int value = Settings.Secure.getInt(resolver, Settings.Secure.QQS_COUNT, 6);
+        mSysuiQqsCount = (SeekBarPreferenceCham) findPreference("sysui_qqs_count");
+        mSysuiQqsCount.setValue(value);
+        mSysuiQqsCount.setOnPreferenceChangeListener(this);
 
         mHeaderBrowse = findPreference(CUSTOM_HEADER_BROWSE);
 
@@ -143,6 +150,12 @@ public class QuickSettings extends BaseSettingsFragment
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         ContentResolver resolver = getActivity().getContentResolver();
+        if (preference == mSysuiQqsCount) {
+            int val = (Integer) newValue;
+            Settings.Secure.putIntForUser(getContentResolver(),
+                    Settings.Secure.QQS_COUNT, val, UserHandle.USER_CURRENT);
+            return true;
+        }
         if (preference == mDaylightHeaderPack) {
             String value = (String) newValue;
             Settings.System.putString(resolver,

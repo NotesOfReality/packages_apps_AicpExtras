@@ -147,4 +147,6 @@
   <!-- Circle app bar -->
   <!--OmniGesture-->
   <string name="use_bottom_gesture_title">Свайп-жести</string>
+  <!-- Small quick settings amount -->
+  <string name="sysui_qqs_count_title">Малі плитки</string>
 </resources>
