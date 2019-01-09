@@ -72,14 +72,14 @@
         android:summary="@string/qqs_scroll_summary"
         android:defaultValue="false"/>
 
-        <com.aicp.gear.preference.SystemSettingSeekBarPreference
+    <com.aicp.gear.preference.SystemSettingSeekBarPreference
         android:key="sysui_qqs_count"
         android:title="@string/sysui_qqs_count_title"
         android:max="8"
         android:min="3"
         android:defaultValue="6"
-        settings:unitsLeft=""
-        settings:unitsRight=""
+        aicpextras:unitsLeft=""
+        aicpextras:unitsRight=""
         android:persistent="false" />
 
     <PreferenceCategory

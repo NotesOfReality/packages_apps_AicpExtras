@@ -28,6 +28,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.provider.Settings.Secure;
 import android.support.v7.preference.ListPreference;
@@ -82,7 +83,7 @@ public class QuickSettings extends BaseSettingsFragment
         ContentResolver resolver = getActivity().getContentResolver();
 
         int value = Settings.Secure.getInt(resolver, Settings.Secure.QQS_COUNT, 6);
-        mSysuiQqsCount = (SeekBarPreferenceCham) findPreference("sysui_qqs_count");
+        mSysuiQqsCount = (SystemSettingSeekBarPreference) findPreference("sysui_qqs_count");
         mSysuiQqsCount.setValue(value);
         mSysuiQqsCount.setOnPreferenceChangeListener(this);
 
